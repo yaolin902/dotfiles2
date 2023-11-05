@@ -36,7 +36,6 @@ return {
       { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", }, }, }
     },
     opts = {
-      -- options for vim.diagnostic.config()
       diagnostics = {
         underline = true,
         update_in_insert = false,
@@ -50,7 +49,6 @@ return {
       inlay_hints = {
         enabled = true,
       },
-      -- add any global capabilities here
       capabilities = {},
       format = {
         formatting_options = nil,
@@ -104,6 +102,24 @@ return {
             usePlaceholders = true,
             completeUnimported = true,
             clangdFileStatus = true,
+          },
+        },
+        pyright = {},
+        ruff_lsp = {
+          keys = {
+            {
+              "<leader>co",
+              function()
+                vim.lsp.buf.code_action({
+                  apply = true,
+                  context = {
+                    only = { "source.organizeImports" },
+                    diagnostics = {},
+                  },
+                })
+              end,
+              desc = "Organize Imports",
+            },
           },
         },
       },

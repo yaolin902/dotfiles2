@@ -104,8 +104,8 @@ autocmd("FileType", {
 
 
 -- Disable focus for nvim-tree
-local ignore_filetypes = { 'nvim-tree', 'NvimTree' }
-local ignore_buftypes = { 'nofile', 'prompt', 'popup' }
+local ignore_filetypes = { 'nvim-tree', 'NvimTree', "undotree" }
+local ignore_buftypes = { 'nofile', 'prompt', 'popup', "undotree" }
 
 autocmd('WinEnter', {
     group = 'BufferClear',

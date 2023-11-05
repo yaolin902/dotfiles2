@@ -65,16 +65,6 @@ return {
       },
     },
   },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    config = function()
-      require("toggleterm").setup({
-        open_mapping = [[<c-\>]],
-        direction = "float",
-      })
-    end,
-  },
 
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -160,5 +150,38 @@ return {
       end,
     },
 
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = function()
+      local hl = vim.api.nvim_set_hl
+      hl(0, "NoiceCmdlinePopupBorder", { fg = "#83A598", bg = "#282828"})
+      hl(0, "NoiceCmdlineIcon", { fg = "#83A598", bg = "#282828"})
+      hl(0, "NoiceCmdlineIconSearch", { fg = "#fabd2f", bg = "#282828"})
+      hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#fabd2f", bg = "#282828"})
+      return {
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+          signature = {
+            enabled = false,
+          },
+        },
+        presets = {
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = false,
+        },
+      }
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+      }
   },
 }

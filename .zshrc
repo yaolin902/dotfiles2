@@ -116,6 +116,9 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     startx
 fi
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # aliases
 alias ls="eza"
 alias cat="batcat"

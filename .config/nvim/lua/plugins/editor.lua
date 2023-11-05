@@ -1,9 +1,6 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    keys = {
-      { "<leader>e", ":NvimTreeToggle<cr>", desc = "toggle nvim-tree" },
-    },
     opts = {
       disable_netrw = true,
       update_focused_file = {
@@ -119,5 +116,14 @@ return {
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
-
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        open_mapping = [[<c-\>]],
+        direction = "float",
+      })
+    end,
+  },
 }

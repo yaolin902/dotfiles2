@@ -40,6 +40,8 @@ opt.pumheight = 10
 opt.undofile = true
 opt.cursorline = true
 opt.updatetime = 300
+opt.timeout = true
+opt.timeoutlen = 300
 
 opt.background = "dark"
 
