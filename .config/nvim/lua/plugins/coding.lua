@@ -26,6 +26,8 @@ return {
       local defaults = require("cmp.config.default")()
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_cmp()
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",

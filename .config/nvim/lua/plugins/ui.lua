@@ -130,28 +130,6 @@ return {
     end,
   },
   {
-    "lewis6991/gitsigns.nvim",
-    event = "VeryLazy",
-    opts = {
-      signs = {
-        add = { text = "▎" },
-        change = { text = "▎" },
-        delete = { text = "" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-      on_attach = function(buffer)
-        local hl = vim.api.nvim_set_hl
-        hl(0, "GitSignsAdd", { fg = "#b8bb26", bg = "#3c3836" })
-        hl(0, "GitSignsChange", { fg = "#8ec07c", bg = "#3c3836" })
-        hl(0, "GitSignsDelete", { fg = "#fb4934", bg = "#3c3836" })
-        hl(0, "GitSignsChangeDelete", { fg = "#fb4934", bg = "#3c3836" })
-      end,
-    },
-
-  },
-  {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = function()

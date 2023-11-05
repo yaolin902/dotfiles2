@@ -1,6 +1,9 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
+    keys = {
+      { "<leader>e", "<cmd>NvimTreeToggle<CR>" },
+    },
     opts = {
       disable_netrw = true,
       update_focused_file = {
@@ -72,7 +75,13 @@ return {
     branch = "master",
     config = true,
   },
-  { "echasnovski/mini.bufremove", event = "VeryLazy", },
+  {
+    "echasnovski/mini.bufremove",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>c", function(n) require("mini.bufremove").delete(n, false) end },
+    },
+  },
   {
     'NvChad/nvim-colorizer.lua',
     event = "VeryLazy",
@@ -83,6 +92,10 @@ return {
     cmd = "Telescope",
     version = false,
     dependencies = { 'nvim-lua/plenary.nvim' },
+    keys = {
+      { "<leader>sf", "<cmd>Telescope find_files<cr>" },
+      { "<leader>st", "<cmd>Telescope live_grep<cr>" },
+    },
     opts = {
       defaults = {
         prompt_prefix = " ",
@@ -102,6 +115,9 @@ return {
   {
     "mbbill/undotree",
     event = "VeryLazy",
+    keys = {
+      { "<leader>u", "<cmd>UndotreeToggle<CR>" },
+    },
     config = function() end,
   },
   {
@@ -109,11 +125,23 @@ return {
     event = "VeryLazy",
     opts = {},
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
       { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash" },
+      {
+        "R",
+        mode = { "o", "x" },
+        function() require("flash").treesitter_search() end,
+        desc =
+        "Treesitter Search"
+      },
+      {
+        "<c-s>",
+        mode = { "c" },
+        function() require("flash").toggle() end,
+        desc =
+        "Toggle Flash Search"
+      },
     },
   },
   {

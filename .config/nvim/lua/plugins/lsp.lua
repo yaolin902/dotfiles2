@@ -30,6 +30,11 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      {"<leader>ld", "<cmd>Lspsaga peek_definition<CR>"},
+      {"<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>"},
+      {"<leader>lo", "<cmd>Lspsaga outline<CR>"},
+    },
     dependencies = {
       -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       -- { "folke/neodev.nvim", opts = {} },
