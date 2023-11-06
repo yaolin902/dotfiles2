@@ -31,14 +31,14 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      {"<leader>ld", "<cmd>Lspsaga peek_definition<CR>"},
-      {"<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>"},
-      {"<leader>lo", "<cmd>Lspsaga outline<CR>"},
+      { "<leader>ld", "<cmd>Lspsaga peek_definition<CR>" },
+      { "<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>" },
+      { "<leader>lo", "<cmd>Lspsaga outline<CR>" },
     },
     dependencies = {
       -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       -- { "folke/neodev.nvim", opts = {} },
-      { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", }, }, }
+      { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", border = "none", }, }, }
     },
     opts = {
       diagnostics = {
@@ -77,6 +77,7 @@ return {
         clangd = {
           keys = {
             { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            { "<leader>ch", "<cmd>lua require('clangd_extensions.inlay_hints').set_inlay_hints()<cr>" },
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
@@ -127,6 +128,8 @@ return {
             },
           },
         },
+        dockerls = {},
+        docker_compose_language_service = {},
       },
       setup = {},
     },
@@ -175,6 +178,7 @@ return {
         "shfmt",
         "prettier",
         "black",
+        "hadolint",
       },
     },
     config = function(_, opts)

@@ -72,6 +72,21 @@ return {
     opts = {
       indent = { char = "▏", },
       scope = { show_start = false, },
+      exclude = {
+        filetypes = {
+          "help",
+          "alpha",
+          "dashboard",
+          "NvimTree",
+          "Trouble",
+          "trouble",
+          "lazy",
+          "mason",
+          "notify",
+          "toggleterm",
+          "lazyterm",
+        },
+      },
     }
   },
 
@@ -134,10 +149,10 @@ return {
     event = "VeryLazy",
     opts = function()
       local hl = vim.api.nvim_set_hl
-      hl(0, "NoiceCmdlinePopupBorder", { fg = "#83A598", bg = "#282828"})
-      hl(0, "NoiceCmdlineIcon", { fg = "#83A598", bg = "#282828"})
-      hl(0, "NoiceCmdlineIconSearch", { fg = "#fabd2f", bg = "#282828"})
-      hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#fabd2f", bg = "#282828"})
+      hl(0, "NoiceCmdlinePopupBorder", { fg = "#83A598", bg = "#282828" })
+      hl(0, "NoiceCmdlineIcon", { fg = "#83A598", bg = "#282828" })
+      hl(0, "NoiceCmdlineIconSearch", { fg = "#fabd2f", bg = "#282828" })
+      hl(0, "NoiceCmdlinePopupBorderSearch", { fg = "#fabd2f", bg = "#282828" })
       return {
         lsp = {
           override = {
@@ -160,6 +175,63 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-      }
+    }
+  },
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    opts = {
+      theme = "hyper",
+      config = {
+        week_header = {
+          enable = false,
+        },
+        shortcut = {
+          { desc = "󰒲 Update", group = "@property", action = "Lazy update", key = "u" },
+          {
+            icon = " ",
+            desc = "Find file",
+            group = "Variable",
+            action = "Telescope find_files",
+            key = "f",
+          },
+          {
+            icon = " ",
+            desc = "New file",
+            group = "String",
+            action = "ene <BAR> startinsert",
+            key = "e",
+          },
+          {
+            icon = "󰠮 ",
+            desc = "Journal entry",
+            group = "DiagnosticHint",
+            action = "Neorg journal today",
+            key = "J",
+          },
+          {
+            icon = " ",
+            desc = "Find project",
+            group = "Boolean",
+            action = "lua require('telescope').extensions.projects.projects()",
+            key = "p",
+          },
+          {
+            icon = " ",
+            desc = "Find text",
+            group = "",
+            action = "Telescope live_grep",
+            key = "t",
+          },
+          {
+            icon = " ",
+            desc = "Quit",
+            group = "Label",
+            action = "qa",
+            key = "q",
+          },
+        },
+      },
+    }
   },
 }

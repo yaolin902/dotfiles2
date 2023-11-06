@@ -54,6 +54,7 @@ return {
         "c",
         "cpp",
         "diff",
+        "dockerfile",
         "html",
         "javascript",
         "jsdoc",

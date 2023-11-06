@@ -79,7 +79,7 @@ return {
     "echasnovski/mini.bufremove",
     event = "VeryLazy",
     keys = {
-      { "<leader>c", function(n) require("mini.bufremove").delete(n, false) end },
+      { "<leader>C", function(n) require("mini.bufremove").delete(n, false) end },
     },
   },
   {
