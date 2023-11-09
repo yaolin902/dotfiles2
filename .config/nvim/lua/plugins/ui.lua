@@ -25,7 +25,7 @@ return {
           lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
           lualine_b = { "branch" },
           lualine_c = { "diagnostics", { "filename", path = 1, }, },
-          lualine_x = { "diff" },
+          lualine_x = { {"diff", symbols = { added = " ", modified = " ", removed = " " },} },
           lualine_y = { "location" },
           lualine_z = { "progress" },
         },
@@ -233,5 +233,14 @@ return {
         },
       },
     }
+  },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = { },
   },
 }

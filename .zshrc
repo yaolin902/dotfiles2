@@ -119,6 +119,8 @@ fi
 export EDITOR=nvim
 export VISUAL=nvim
 
+source "$HOME/.cargo/env"
+
 # aliases
 alias ls="eza"
 alias cat="batcat"
@@ -149,3 +151,7 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load
+
+
+# plugin configs
+ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS='--height=10 --layout=reverse'

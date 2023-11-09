@@ -76,7 +76,8 @@ return {
         -- Ensure mason installs the server
         clangd = {
           keys = {
-            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>",                                      desc =
+            "Switch Source/Header (C/C++)" },
             { "<leader>ch", "<cmd>lua require('clangd_extensions.inlay_hints').set_inlay_hints()<cr>" },
           },
           root_dir = function(fname)
@@ -130,6 +131,27 @@ return {
         },
         dockerls = {},
         docker_compose_language_service = {},
+        pylyzer = {
+          root_dir = function(fname)
+            return require("lspconfig.util").root_pattern(
+              "pyproject.toml",
+              "setup.py",
+              "setup.cfg",
+              "requirements.txt",
+              "Pipfile"
+            )(fname) or require("lspconfig.util").find_git_ancestor(
+              fname
+            ) or require("lspconfig.util").path.dirname(fname)
+          end,
+          settings = {
+            python = {
+              checkOnType = false,
+              diagnostics = true,
+              inlayHints = true,
+              smartCompletion = true,
+            }
+          }
+        },
       },
       setup = {},
     },
@@ -179,11 +201,14 @@ return {
         "prettier",
         "black",
         "hadolint",
+        "mypy",
+        "ruff",
+        "pyright",
+        "clangd",
+        "clang-format",
       },
     },
     config = function(_, opts)
-      table.insert(opts.ensure_installed, "prettier")
-      table.insert(opts.ensure_installed, "black")
       require("mason").setup(opts)
       local mr = require("mason-registry")
       mr:on("package:install:success", function()

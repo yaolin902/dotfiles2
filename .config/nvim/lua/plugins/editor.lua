@@ -154,4 +154,24 @@ return {
       })
     end,
   },
+  {
+    "folke/todo-comments.nvim",
+    opts = {},
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    keys = {
+      { "-", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
+    },
+  },
+  {
+    "nvim-pack/nvim-spectre",
+    build = false,
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    keys = {
+      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+  },
 }
