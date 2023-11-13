@@ -1,7 +1,6 @@
 return {
   {
     "nvimtools/none-ls.nvim",
-    optional = true,
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
@@ -12,7 +11,7 @@ return {
       table.insert(opts.sources, nls.builtins.diagnostics.mypy)
       table.insert(opts.sources, nls.builtins.diagnostics.ruff)
       table.insert(opts.sources, nls.builtins.diagnostics.flake8)
-      table.insert(opts.sources, nls.builtins.diagnostics.pylyzer)
+      table.insert(opts.sources, nls.builtins.diagnostics.lua_ls)
     end,
   },
   {

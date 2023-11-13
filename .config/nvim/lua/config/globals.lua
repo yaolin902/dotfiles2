@@ -34,7 +34,6 @@ opt.relativenumber = true
 opt.shortmess:append("c")
 opt.whichwrap:append("<,>,[,],h,l")
 opt.iskeyword:append("-")
-opt.formatoptions:remove({ "c", "r", "o" })
 opt.fillchars.eob = " "
 opt.pumheight = 10
 opt.undofile = true
@@ -46,7 +45,7 @@ opt.timeoutlen = 300
 opt.background = "dark"
 
 opt.list = true
-opt.listchars:append("space:·")
+opt.listchars:append("space:⋅")
 opt.listchars:append("eol:↴")
 
 opt.foldcolumn = '1'

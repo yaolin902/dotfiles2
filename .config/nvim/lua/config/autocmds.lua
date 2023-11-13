@@ -21,29 +21,29 @@ autocmd('BufWritePre', {
 
 -- Start Git messages in insert mode
 autocmd('FileType', {
-  group    = 'BufferClear',
-  pattern  = { 'gitcommit', 'gitrebase', },
-  command  = 'startinsert | 1'
+  group   = 'BufferClear',
+  pattern = { 'gitcommit', 'gitrebase', },
+  command = 'startinsert | 1'
 })
 
 -- Go to last location on buffer open
-autocmd('BufReadPost',  {
+autocmd('BufReadPost', {
   group    = 'BufferClear',
   pattern  = '*',
   callback = function()
-     local ft = vim.opt_local.filetype:get()
-        -- don't apply to git messages
-        if (ft:match('commit') or ft:match('rebase')) then
-            return
-        end
-        -- get position of last saved edit
-        local markpos = vim.api.nvim_buf_get_mark(0,'"')
-        local line = markpos[1]
-        local col = markpos[2]
-        -- if in range, go there
-        if (line > 1) and (line <= vim.api.nvim_buf_line_count(0)) then
-            vim.api.nvim_win_set_cursor(0,{line,col})
-        end
+    local ft = vim.opt_local.filetype:get()
+    -- don't apply to git messages
+    if (ft:match('commit') or ft:match('rebase')) then
+      return
+    end
+    -- get position of last saved edit
+    local markpos = vim.api.nvim_buf_get_mark(0, '"')
+    local line = markpos[1]
+    local col = markpos[2]
+    -- if in range, go there
+    if (line > 1) and (line <= vim.api.nvim_buf_line_count(0)) then
+      vim.api.nvim_win_set_cursor(0, { line, col })
+    end
   end
 })
 
@@ -108,24 +108,32 @@ local ignore_filetypes = { 'nvim-tree', 'NvimTree', "undotree" }
 local ignore_buftypes = { 'nofile', 'prompt', 'popup', "undotree" }
 
 autocmd('WinEnter', {
-    group = 'BufferClear',
-    callback = function(_)
-        if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
-        then
-            vim.w.focus_disable = true
-        else
-            vim.w.focus_disable = false
-        end
-    end,
+  group = 'BufferClear',
+  callback = function(_)
+    if vim.tbl_contains(ignore_buftypes, vim.bo.buftype)
+    then
+      vim.w.focus_disable = true
+    else
+      vim.w.focus_disable = false
+    end
+  end,
 })
 
 autocmd('FileType', {
-    group = 'BufferClear',
-    callback = function(_)
-        if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-            vim.b.focus_disable = true
-        else
-            vim.b.focus_disable = false
-        end
-    end,
+  group = 'BufferClear',
+  callback = function(_)
+    if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+      vim.b.focus_disable = true
+    else
+      vim.b.focus_disable = false
+    end
+  end,
 })
+
+
+-- No comment next line
+autocmd('BufWinEnter', {
+  pattern = "*",
+  command = "set formatoptions-=cro"
+})
+

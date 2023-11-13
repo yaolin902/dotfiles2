@@ -38,7 +38,9 @@ return {
     dependencies = {
       -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       -- { "folke/neodev.nvim", opts = {} },
-      { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", border = "none", }, }, }
+      { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", border = "none", }, }, },
+      { "folke/trouble.nvim", lazy = true},
+      -- { "lvimuser/lsp-inlayhints.nvim", branch = "anticonceal",  opts = {},},
     },
     opts = {
       diagnostics = {
@@ -62,6 +64,7 @@ return {
       -- LSP Server Settings
       servers = {
         lua_ls = {
+          single_file_support = true,
           settings = {
             Lua = {
               workspace = {
@@ -70,15 +73,22 @@ return {
               completion = {
                 callSnippet = "Replace",
               },
+              hint = {
+                enable = true,
+                arrayIndex = "Enable",
+                setType = true,
+              },
             },
           },
         },
-        -- Ensure mason installs the server
         clangd = {
           keys = {
-            { "<leader>cR", "<cmd>ClangdSwitchSourceHeader<cr>",                                      desc =
-            "Switch Source/Header (C/C++)" },
-            { "<leader>ch", "<cmd>lua require('clangd_extensions.inlay_hints').set_inlay_hints()<cr>" },
+            {
+              "<leader>cR",
+              "<cmd>ClangdSwitchSourceHeader<cr>",
+              desc =
+              "Switch Source/Header (C/C++)"
+            },
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
@@ -111,27 +121,14 @@ return {
             clangdFileStatus = true,
           },
         },
-        pyright = {},
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              function()
-                vim.lsp.buf.code_action({
-                  apply = true,
-                  context = {
-                    only = { "source.organizeImports" },
-                    diagnostics = {},
-                  },
-                })
-              end,
-              desc = "Organize Imports",
-            },
-          },
+        pyright = {
+          analysis = {
+            typeCheckingMode = "basic",
+          }
         },
-        dockerls = {},
-        docker_compose_language_service = {},
         pylyzer = {
+          cmd = { '/home/yao/.local/share/nvim/mason/bin/pylyzer', '--server' },
+          filetypes = { 'python' },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
               "pyproject.toml",
@@ -153,7 +150,7 @@ return {
           }
         },
       },
-      setup = {},
+      setup = { },
     },
     config = function(_, opts)
       local signs = {
@@ -171,6 +168,7 @@ return {
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
 
+
       lsp_zero.on_attach(function(client, bufnr)
         -- see :help lsp-zero-keybindings
         -- to learn the available actions
@@ -180,12 +178,24 @@ return {
             border = "none",
           },
         }, bufnr)
+
+        if client.name == "clangd" then
+          require("clangd_extensions.inlay_hints").setup_autocmd()
+          require("clangd_extensions.inlay_hints").set_inlay_hints()
+        end
+
+        if client.server_capabilities.inlayHintProvider then
+          vim.g.inlay_hints_visible = true
+          vim.lsp.inlay_hint(bufnr, true)
+        end
+
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
       -- (Optional) Configure lua language server for neovim
-      local lua_opts = lsp_zero.nvim_lua_ls()
+      local lua_opts = lsp_zero.nvim_lua_ls(opts.servers.lua_ls)
       require('lspconfig').lua_ls.setup(lua_opts)
+      require('lspconfig').pylyzer.setup(opts.servers.pylyzer)
     end,
   },
 

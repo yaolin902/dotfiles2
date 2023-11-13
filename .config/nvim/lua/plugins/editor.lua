@@ -174,4 +174,8 @@ return {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
     },
   },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "VeryLazy",
+  },
 }

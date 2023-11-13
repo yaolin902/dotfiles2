@@ -126,6 +126,7 @@ alias ls="eza"
 alias cat="batcat"
 alias grep="rg"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias v="fdfind --type f --hidden --exclude .git | fzf-tmux -p --reverse --preview='less {}' | xargs nvim"
 
 eval "$(zoxide init zsh)"
 
@@ -135,6 +136,7 @@ source ~/.zplug/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 zplug "joshskidmore/zsh-fzf-history-search"
+zplug "chisui/zsh-nix-shell"
 zplug "Aloxaf/fzf-tab"
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh

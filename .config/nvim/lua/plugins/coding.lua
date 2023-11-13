@@ -60,6 +60,7 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+          { name = "codeium" }
         }, {
           { name = "buffer" },
         }),
@@ -68,6 +69,7 @@ return {
             mode = 'symbol',
             maxwidth = 50,
             ellipsis_char = '...',
+            symbol_map = { Codeium = "", }
           })
         },
         experimental = {
@@ -88,4 +90,5 @@ return {
     end,
     ft = { "markdown" },
   },
+  { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm", filetype = { python = "python3 -u", } }, },
 }

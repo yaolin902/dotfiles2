@@ -35,6 +35,7 @@ return {
         end,
       },
       { "JoosepAlviste/nvim-ts-context-commentstring", },
+      { "nvim-treesitter/playground", },
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
@@ -148,5 +149,10 @@ return {
         },
       }
     end,
+  },
+  {
+    "Wansmer/treesj",
+    keys = { "<space>m", "<space>j","<space>s",},
+    opts = {},
   },
 }

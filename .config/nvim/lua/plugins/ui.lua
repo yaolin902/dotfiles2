@@ -243,4 +243,9 @@ return {
     end,
     opts = { },
   },
+  {
+    "nacro90/numb.nvim",
+    event = "VeryLazy",
+    opts = {},
+  }
 }
