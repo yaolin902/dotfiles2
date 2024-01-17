@@ -118,17 +118,33 @@ fi
 
 export EDITOR=nvim
 export VISUAL=nvim
+export OPENAI_API_KEY=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
 
 source "$HOME/.cargo/env"
 
 # aliases
 alias ls="eza"
-alias cat="batcat"
+alias cat="bat"
 alias grep="rg"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias v="fdfind --type f --hidden --exclude .git | fzf-tmux -p --reverse --preview='less {}' | xargs nvim"
 
+apt() {
+  command nala "$@"
+}
+
+doas() {
+  if [ "$1" = "apt" ]; then
+    shift
+    command doas nala "$@"
+  else
+    command doas "$@"
+  fi
+}
+
 eval "$(zoxide init zsh)"
+
+colorscript random
 
 # zplug
 source ~/.zplug/init.zsh
@@ -157,3 +173,4 @@ zplug load
 
 # plugin configs
 ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS='--height=10 --layout=reverse'
+POWERLEVEL9K_INSTANT_PROMPT='quiet'

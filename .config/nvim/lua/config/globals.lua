@@ -57,3 +57,4 @@ opt.foldlevelstart = -1
 opt.foldenable = true
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
+

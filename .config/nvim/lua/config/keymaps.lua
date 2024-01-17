@@ -27,6 +27,3 @@ map("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 map("i", "<esc>", "<cmd>noh<cr><esc>", opts)
 map("n", "<esc>", "<cmd>noh<cr><esc>", opts)
-
-map("n", "<leader>w", "<cmd>w!<CR>", opts)
-map("n", "<leader>q", "<cmd>confirm q<CR>", opts)

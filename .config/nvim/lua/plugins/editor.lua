@@ -2,7 +2,7 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     keys = {
-      { "<leader>e", "<cmd>NvimTreeToggle<CR>" },
+      { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" },
     },
     opts = {
       disable_netrw = true,
@@ -79,7 +79,7 @@ return {
     "echasnovski/mini.bufremove",
     event = "VeryLazy",
     keys = {
-      { "<leader>C", function(n) require("mini.bufremove").delete(n, false) end },
+      { "<leader>C", function(n) require("mini.bufremove").delete(n, false) end, desc = "Close Buffer", },
     },
   },
   {
@@ -93,8 +93,20 @@ return {
     version = false,
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-      { "<leader>sf", "<cmd>Telescope find_files<cr>" },
-      { "<leader>st", "<cmd>Telescope live_grep<cr>" },
+      { "<leader>go", "<cmd>Telescope git_status<CR>", desc = "Tchanged" },
+      { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Tcommits" },
+      { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Tstatus" },
+      { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
+      { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+      { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+      { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find files"},
+      { "<leader>st", "<cmd>Telescope live_grep<cr>", desc = "Grep text" },
+      { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+      { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+      { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+      { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     },
     opts = {
       defaults = {
@@ -116,7 +128,7 @@ return {
     "mbbill/undotree",
     event = "VeryLazy",
     keys = {
-      { "<leader>u", "<cmd>UndotreeToggle<CR>" },
+      { "<leader>u", "<cmd>UndotreeToggle<CR>", desc = "Undo Tree" },
     },
     config = function() end,
   },
@@ -157,6 +169,12 @@ return {
   {
     "folke/todo-comments.nvim",
     opts = {},
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+    },
   },
   {
     'stevearc/oil.nvim',

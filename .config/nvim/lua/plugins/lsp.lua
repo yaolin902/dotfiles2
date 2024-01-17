@@ -31,15 +31,42 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>ld", "<cmd>Lspsaga peek_definition<CR>" },
-      { "<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>" },
-      { "<leader>lo", "<cmd>Lspsaga outline<CR>" },
+      { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",      desc = "Code Action" },
+      { "<leader>ld", "<cmd>Lspsaga peek_definition<CR>",            desc = "Peek Def" },
+      { "<leader>lf", "<cmd>lua vim.lsp.buf.format{async=true}<cr>", desc = "Format" },
+      { "<leader>lo", "<cmd>Lspsaga outline<CR>",                    desc = "Outline" },
+      { "<leader>li", "<cmd>LspInfo<CR>",                            desc = "Info" },
+      { "<leader>lm", "<cmd>Mason<CR>",                              desc = "Mason" },
+      { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>",         desc = "Code Lens" },
+      { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<cr>",     desc = "Next Diagnostic" },
+      { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>",     desc = "Prev Diagnostic" },
+      {
+        "<leader>lh",
+        function()
+          if vim.g.inlay_hints_visible then
+            vim.g.inlay_hints_visible = false
+            vim.lsp.inlay_hint(vim.api.nvim_buf_get_number(0), false)
+          else
+            vim.g.inlay_hints_visible = true
+            vim.lsp.inlay_hint(vim.api.nvim_buf_get_number(0), true)
+          end
+        end,
+        desc = "Toggle Hints"
+      },
     },
     dependencies = {
       -- { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
       -- { "folke/neodev.nvim", opts = {} },
       { "nvimdev/lspsaga.nvim", opts = { ui = { code_action = "", border = "none", }, }, },
-      { "folke/trouble.nvim", lazy = true},
+      {
+        "folke/trouble.nvim",
+        keys = {
+          { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+          { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+          { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+          { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
+        }
+      },
       -- { "lvimuser/lsp-inlayhints.nvim", branch = "anticonceal",  opts = {},},
     },
     opts = {
@@ -127,6 +154,7 @@ return {
           }
         },
         pylyzer = {
+          autostart = false,
           cmd = { '/home/yao/.local/share/nvim/mason/bin/pylyzer', '--server' },
           filetypes = { 'python' },
           root_dir = function(fname)
@@ -150,7 +178,7 @@ return {
           }
         },
       },
-      setup = { },
+      setup = {},
     },
     config = function(_, opts)
       local signs = {
@@ -179,14 +207,13 @@ return {
           },
         }, bufnr)
 
-        if client.name == "clangd" then
-          require("clangd_extensions.inlay_hints").setup_autocmd()
-          require("clangd_extensions.inlay_hints").set_inlay_hints()
-        end
+        -- if client.name == "clangd" then
+        --   require("clangd_extensions.inlay_hints").setup_autocmd()
+        --   require("clangd_extensions.inlay_hints").set_inlay_hints()
+        -- end
 
         if client.server_capabilities.inlayHintProvider then
-          vim.g.inlay_hints_visible = true
-          vim.lsp.inlay_hint(bufnr, true)
+          vim.lsp.inlay_hint(bufnr, false)
         end
 
         lsp_zero.default_keymaps({ buffer = bufnr })

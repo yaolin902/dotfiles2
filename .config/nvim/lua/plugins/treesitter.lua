@@ -8,6 +8,7 @@ return {
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
     end,
+    keys = { { "<leader>ti", "<cmd>TSConfigInfo<cr>", desc = "Info" } },
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -34,8 +35,8 @@ return {
           end
         end,
       },
-      { "JoosepAlviste/nvim-ts-context-commentstring", },
-      { "nvim-treesitter/playground", },
+      { "JoosepAlviste/nvim-ts-context-commentstring" },
+      { "nvim-treesitter/playground",                  keys = { "<leader>tt", "<cmd>InspectTree<cr>", desc = "View Tree" } },
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
@@ -45,9 +46,6 @@ return {
         enable = true,
       },
       autotag = {
-        enable = true,
-      },
-      context_commentstring = {
         enable = true,
       },
       ensure_installed = {
@@ -109,6 +107,7 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
+      require('ts_context_commentstring').setup {}
     end,
   },
 
@@ -152,7 +151,10 @@ return {
   },
   {
     "Wansmer/treesj",
-    keys = { "<space>m", "<space>j","<space>s",},
-    opts = {},
+    config = function()
+      require('treesj').setup({})
+      vim.keymap.set("n", "<leader>ts", ":lua require('treesj').split()<cr>", { desc = "Split" })
+      vim.keymap.set("n", "<leader>tj", ":lua require('treesj').join()<cr>", { desc = "Join" })
+    end,
   },
 }

@@ -21,6 +21,7 @@ return {
       "onsails/lspkind.nvim",
     },
     opts = function()
+      vim.g.cmp_enabled = true
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
@@ -31,6 +32,9 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snips" } })
 
       return {
+        enabled = function()
+          return vim.g.cmp_enabled
+        end,
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -90,5 +94,52 @@ return {
     end,
     ft = { "markdown" },
   },
-  { "CRAG666/code_runner.nvim", opts = { mode = "toggleterm", filetype = { python = "python3 -u", } }, },
+  {
+    "CRAG666/code_runner.nvim",
+    keys = {
+      {"<leader>r", "<cmd>RunCode<CR>", desc = "Run Code"},
+    },
+    opts = {
+      mode = "toggleterm",
+      filetype = {
+        python = "python3 -u",
+      },
+    },
+  },
+  {
+    "folke/zen-mode.nvim",
+    keys = {
+      {"<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode"},
+    },
+    opts = {
+      window = {
+        backdrop = 1,
+        options = {
+          signcolumn = "no",
+          foldcolumn = "0",
+          cursorcolumn = false,
+          cursorline = false,
+          relativenumber = false,
+        },
+      },
+      plugins = {
+        tmux = { enabled = true },
+      },
+      on_open = function(win)
+        vim.opt.colorcolumn = "0"
+        vim.diagnostic.hide()
+        vim.opt.list = false
+        vim.cmd([[IBLToggle]])
+        vim.g.cmp_enabled = false
+      end,
+      on_close = function()
+        vim.opt.colorcolumn = "80"
+        vim.diagnostic.show()
+        vim.opt.list = true
+        vim.cmd([[IBLToggle]])
+        vim.g.cmp_enabled = true
+      end,
+    },
+  },
+  {"mg979/vim-visual-multi"},
 }

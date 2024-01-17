@@ -136,9 +136,24 @@ return {
       local builtin = require("statuscol.builtin")
       return {
         relculright = true,
+        setopt = true,
         segments = {
+          {
+            sign = {
+              namespace = { "gitsign" },
+              maxwidth = 1,
+              colwidth = 1,
+              auto = true,
+              fillchar = " ",
+              fillcharhl = "SignColumn",
+            },
+            click = "v:lua.ScSa",
+          },
+          {
+            sign = { name = { "Diagnostic" }, maxwidth = 1, auto = true },
+            click = "v:lua.ScSa"
+          },
           { text = { builtin.foldfunc },      click = "v:lua.ScFa" },
-          { text = { "%s" },                  click = "v:lua.ScSa" },
           { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
         },
       }
@@ -235,17 +250,37 @@ return {
     }
   },
   {
+    "nacro90/numb.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
-    opts = { },
+    opts = {
+      plugins = { spelling = true },
+      defaults = {
+        mode = {"n"},
+        ["<leader>w"] = { "<cmd>w!<CR>", "Save" },
+        ["<leader>q"] = { "<cmd>confirm q<CR>", "Quit" },
+        ["<leader>c"] = { "+ChatGPT" },
+        ["<leader>l"] = { name = "+Lsp" },
+        ["<leader>d"] = { name = "+Debug" },
+        ["<leader>g"] = { name = "+Git" },
+        ["<leader>gh"] = { name = "+Git Hunks" },
+        ["<leader>s"] = { name = "+Search" },
+        ["<leader>t"] = { name = "+Treesitter" },
+        ["<leader>x"] = { name = "+Diagnostics/Quickfix" },
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
+    end,
   },
-  {
-    "nacro90/numb.nvim",
-    event = "VeryLazy",
-    opts = {},
-  }
 }
