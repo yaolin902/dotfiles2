@@ -97,7 +97,7 @@ return {
   {
     "CRAG666/code_runner.nvim",
     keys = {
-      {"<leader>r", "<cmd>RunCode<CR>", desc = "Run Code"},
+      { "<leader>r", "<cmd>RunCode<CR>", desc = "Run Code" },
     },
     opts = {
       mode = "toggleterm",
@@ -109,7 +109,7 @@ return {
   {
     "folke/zen-mode.nvim",
     keys = {
-      {"<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode"},
+      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode" },
     },
     opts = {
       window = {
@@ -141,5 +141,13 @@ return {
       end,
     },
   },
-  {"mg979/vim-visual-multi"},
+  { "mg979/vim-visual-multi" },
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = true,
+    optional = true,
+    -- Uncomment next line if you want to follow only stable versions
+    -- version = "*"
+  },
 }

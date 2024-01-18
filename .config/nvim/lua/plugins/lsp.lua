@@ -153,6 +153,9 @@ return {
             typeCheckingMode = "basic",
           }
         },
+        ruff_lsp = {
+          autostart = false,
+        },
         pylyzer = {
           autostart = false,
           cmd = { '/home/yao/.local/share/nvim/mason/bin/pylyzer', '--server' },
@@ -187,6 +190,9 @@ return {
         { name = "DiagnosticSignHint", text = "󰌵" },
         { name = "DiagnosticSignInfo", text = "" },
       }
+
+      local hl = vim.api.nvim_set_hl
+      hl(0, "LspInlayHint", { fg = "#d5c4a1", bg = "#504945" })
 
       for _, sign in ipairs(signs) do
         vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
@@ -223,6 +229,44 @@ return {
       local lua_opts = lsp_zero.nvim_lua_ls(opts.servers.lua_ls)
       require('lspconfig').lua_ls.setup(lua_opts)
       require('lspconfig').pylyzer.setup(opts.servers.pylyzer)
+
+      -- custom lsp
+      local lspconfig = require 'lspconfig'
+      local configs = require 'lspconfig.configs'
+
+      if not configs.secret_lsp then
+        configs.secret_lsp = {
+          default_config = {
+            cmd = { 'delance-langserver', '--stdio' },
+            root_dir = function(fname)
+              return require("lspconfig.util").root_pattern(
+                "pyproject.toml",
+                "setup.py",
+                "setup.cfg",
+                "requirements.txt",
+                "Pipfile"
+              )(fname) or require("lspconfig.util").find_git_ancestor(
+                fname
+              ) or require("lspconfig.util").path.dirname(fname)
+            end,
+            filetypes = { 'python' },
+            single_file_support = true,
+            settings = {
+              python = {
+                pythonPath = "/usr/bin/python3",
+                analysis = {
+                  inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                    callArgumentNames = true,
+                  },
+                },
+              },
+            },
+          },
+        }
+      end
+      lspconfig.secret_lsp.setup {}
     end,
   },
 

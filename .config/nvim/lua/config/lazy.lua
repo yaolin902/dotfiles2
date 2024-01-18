@@ -59,3 +59,4 @@ require("lazy").setup("plugins", {
     notify = false, -- get a notification when changes are found
   },
 })
+

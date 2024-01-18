@@ -11,7 +11,7 @@ return {
       table.insert(opts.sources, nls.builtins.diagnostics.mypy)
       table.insert(opts.sources, nls.builtins.diagnostics.ruff)
       table.insert(opts.sources, nls.builtins.diagnostics.flake8)
-      table.insert(opts.sources, nls.builtins.diagnostics.lua_ls)
+      -- table.insert(opts.sources, nls.builtins.diagnostics.lua_ls)
     end,
   },
   {
