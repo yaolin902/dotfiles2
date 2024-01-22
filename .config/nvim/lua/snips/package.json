@@ -1,0 +1,31 @@
+{
+    "name": "snips",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "markdown",
+                    "html",
+                ],
+                "path": "./snippets/global.json"
+            },
+            {
+                "language": "markdown",
+                "path": "./snippets/markdown.json"
+            },
+            {
+                "language": [
+                    "json"
+                ],
+                "path": "./snippets/json.json"
+            },
+            {
+                "language": ["css", "scss"],
+                "path": "./snippets/css.json"
+            },
+    ]
+    }
+}
