@@ -53,10 +53,12 @@ set showmatch
 set guioptions-=T
 
 set splitright
+set splitbelow
 
 set ai
 set si
 
+set path+=**
 set wildmenu
 set wildcharm=<Tab>
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.o
@@ -67,6 +69,7 @@ set shell=/usr/bin/zsh
 
 set encoding=utf-8
 
+let g:netrw_banner=0
 let g:netrw_liststyle=3
 
 " statusline
@@ -93,19 +96,20 @@ set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
-set statusline+=\ %l:%c
-set statusline+=\
+set statusline+=\ %l:%c 
 
 " mappings
 
 let g:mapleader="\<Space>"
 
 nnoremap <Leader>q :q!<CR>
+nnoremap <Leader>w :w<CR>
 nnoremap <Leader>wq :wq<CR>
-nnoremap <Leader>t :vertical terminal<CR>
+nnoremap <Leader>t :horizontal terminal<CR>
 nnoremap <Leader>e :topleft vs<CR>:e .<CR>
 nnoremap <Leader>h :noh<CR>
 nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>N :tabnext<CR>
 
 nnoremap <silent> <C-h> <C-w>h
 nnoremap <silent> <C-j> <C-w>j
