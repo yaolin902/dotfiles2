@@ -43,13 +43,7 @@ return {
       {
         "<leader>lh",
         function()
-          if vim.g.inlay_hints_visible then
-            vim.g.inlay_hints_visible = false
-            vim.lsp.inlay_hint(vim.api.nvim_buf_get_number(0), false)
-          else
-            vim.g.inlay_hints_visible = true
-            vim.lsp.inlay_hint(vim.api.nvim_buf_get_number(0), true)
-          end
+          vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
         end,
         desc = "Toggle Hints"
       },
@@ -218,9 +212,9 @@ return {
         --   require("clangd_extensions.inlay_hints").set_inlay_hints()
         -- end
 
-        if client.server_capabilities.inlayHintProvider then
-          vim.lsp.inlay_hint(bufnr, false)
-        end
+        -- if client.server_capabilities.inlayHintProvider then
+        --   vim.lsp.inlay_hint(bufnr, false)
+        -- end
 
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
