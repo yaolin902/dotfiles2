@@ -9,8 +9,8 @@ return {
       table.insert(opts.sources, nls.builtins.formatting.clang_format)
       table.insert(opts.sources, nls.builtins.diagnostics.hadolint)
       table.insert(opts.sources, nls.builtins.diagnostics.mypy)
-      table.insert(opts.sources, nls.builtins.diagnostics.ruff)
-      table.insert(opts.sources, nls.builtins.diagnostics.flake8)
+      -- table.insert(opts.sources, nls.builtins.diagnostics.ruff)
+      -- table.insert(opts.sources, nls.builtins.diagnostics.flake8)
       -- table.insert(opts.sources, nls.builtins.diagnostics.lua_ls)
     end,
   },

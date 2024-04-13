@@ -128,6 +128,7 @@ alias cat="bat"
 alias grep="rg"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias v="fdfind --type f --hidden --exclude .git | fzf-tmux -p --reverse --preview='less {}' | xargs nvim"
+alias ptpython="ptpython --dark-bg"
 
 apt() {
   command nala "$@"

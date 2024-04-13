@@ -260,7 +260,7 @@ return {
           },
         }
       end
-      lspconfig.secret_lsp.setup {}
+      -- lspconfig.secret_lsp.setup {}
     end,
   },
 

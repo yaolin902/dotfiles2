@@ -36,29 +36,36 @@ return {
         map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")      end,
+        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+      end,
     },
 
   },
   {
     "sindrets/diffview.nvim",
     keys = {
-      {"<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diff View"},
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Diff View" },
     },
   },
   {
     "kdheepak/lazygit.nvim",
-    init = function ()
-      vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit"})
+    init = function()
+      vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
     end
   },
-  { "pwntester/octo.nvim", opts = {}, },
+  {
+    "pwntester/octo.nvim",
+    optional = true,
+    config = function()
+      require "octo".setup()
+    end
+  },
   {
     "NeogitOrg/neogit",
     lazy = true,
     cmd = "Neogit",
     keys = {
-      {"<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit"},
+      { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" },
     },
     opts = {
       disable_commit_confirmation = true,
@@ -74,10 +81,10 @@ return {
       disable_diagnostics = true,
     },
     keys = {
-      { "<leader>gco", ":GitConflictChooseOurs<cr>", desc = "Conflict Choose Ours" },
+      { "<leader>gco", ":GitConflictChooseOurs<cr>",   desc = "Conflict Choose Ours" },
       { "<leader>gct", ":GitConflictChooseTheirs<cr>", desc = "Conflict Choose Theirs" },
-      { "<leader>gcb", ":GitConflictChooseBoth<cr>", desc = "Conflict Choose Both" },
-      { "<leader>gc0", ":GitConflictChooseNone<cr>", desc = "Conflict Choose None" },
+      { "<leader>gcb", ":GitConflictChooseBoth<cr>",   desc = "Conflict Choose Both" },
+      { "<leader>gc0", ":GitConflictChooseNone<cr>",   desc = "Conflict Choose None" },
       { "]x",          ":GitConflictNextConflict<cr>" },
       { "[x",          ":GitConflictPrevConflict<cr>" },
     },
@@ -93,10 +100,10 @@ return {
   },
   {
     "junegunn/gv.vim",
-    dependencies = {"tpope/vim-fugitive",},
+    dependencies = { "tpope/vim-fugitive", },
     keys = {
-      {"<leader>gv", "<cmd>GV<cr>", desc = "Git View"},
-      {"<leader>gvc", "<cmd>GV!<cr>", desc = "Git View Curr File"},
+      { "<leader>gv",  "<cmd>GV<cr>",  desc = "Git View" },
+      { "<leader>gvc", "<cmd>GV!<cr>", desc = "Git View Curr File" },
     },
   },
   -- {"ThePrimeagen/git-worktree.nvim", opts = {} }

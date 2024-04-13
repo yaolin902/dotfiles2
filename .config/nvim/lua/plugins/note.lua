@@ -2,6 +2,7 @@ return {
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
+    optional = true,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("neorg").setup {
