@@ -119,12 +119,14 @@ fi
 export EDITOR=nvim
 export VISUAL=nvim
 export OPENAI_API_KEY=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
+export NIXPKGS_ALLOW_UNFREE=1
 
 source "$HOME/.cargo/env"
 
 # aliases
 alias ls="eza"
 alias cat="bat"
+alias ccat="bat --style=plain"
 alias grep="rg"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias v="fdfind --type f --hidden --exclude .git | fzf-tmux -p --reverse --preview='less {}' | xargs nvim"

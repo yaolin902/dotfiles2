@@ -8,10 +8,9 @@ return {
       delete_check_events = "TextChanged",
     },
   },
-
   {
     "hrsh7th/nvim-cmp",
-    version = false, -- last release is way too old
+    version = false,
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
@@ -106,48 +105,20 @@ return {
       },
     },
   },
-  {
-    "folke/zen-mode.nvim",
-    keys = {
-      { "<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode" },
-    },
-    opts = {
-      window = {
-        backdrop = 1,
-        options = {
-          signcolumn = "no",
-          foldcolumn = "0",
-          cursorcolumn = false,
-          cursorline = false,
-          relativenumber = false,
-        },
-      },
-      plugins = {
-        tmux = { enabled = true },
-      },
-      on_open = function(win)
-        vim.opt.colorcolumn = "0"
-        vim.diagnostic.hide()
-        vim.opt.list = false
-        vim.cmd([[IBLToggle]])
-        vim.g.cmp_enabled = false
-      end,
-      on_close = function()
-        vim.opt.colorcolumn = "80"
-        vim.diagnostic.show()
-        vim.opt.list = true
-        vim.cmd([[IBLToggle]])
-        vim.g.cmp_enabled = true
-      end,
-    },
-  },
   { "mg979/vim-visual-multi" },
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
     config = true,
     optional = true,
-    -- Uncomment next line if you want to follow only stable versions
-    -- version = "*"
+  },
+  {
+    "Exafunction/codeium.nvim",
+    optional = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    opts = {},
   },
 }

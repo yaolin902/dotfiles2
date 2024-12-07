@@ -3,16 +3,16 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    init = function()
-      vim.g.lualine_laststatus = vim.o.laststatus
-      if vim.fn.argc(-1) > 0 then
-        vim.o.statusline = " "
-      else
-        vim.o.laststatus = 0
-      end
-    end,
+    -- init = function()
+    --   vim.g.lualine_laststatus = vim.o.laststatus
+    --   if vim.fn.argc(-1) > 0 then
+    --     vim.o.statusline = " "
+    --   else
+    --     vim.o.laststatus = 0
+    --   end
+    -- end,
     opts = function()
-      vim.o.laststatus = vim.g.lualine_laststatus
+      -- vim.o.laststatus = vim.g.lualine_laststatus
       return {
         options = {
           theme = "gruvbox",
@@ -25,7 +25,7 @@ return {
           lualine_a = { { 'mode', fmt = function(str) return str:sub(1, 1) end } },
           lualine_b = { "branch" },
           lualine_c = { "diagnostics", { "filename", path = 1, }, },
-          lualine_x = { {"diff", symbols = { added = " ", modified = " ", removed = " " },} },
+          lualine_x = { { "diff", symbols = { added = " ", modified = " ", removed = " " }, } },
           lualine_y = { "location" },
           lualine_z = { "progress" },
         },
@@ -48,11 +48,11 @@ return {
         close_icon = "",
         left_trunc_marker = "",
         right_trunc_marker = "",
-        diagnostics = "nvim_lsp",
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          local icon = level:match("error") and " " or " "
-          return " " .. icon .. count
-        end,
+        -- diagnostics = "nvim_lsp",
+        -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        --   local icon = level:match("error") and " " or " "
+        --   return " " .. icon .. count
+        -- end,
         always_show_bufferline = true,
         offsets = {
           {
@@ -96,6 +96,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
+    -- optional = true,
     config = function()
       require('ufo').setup({
         fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
@@ -162,6 +163,7 @@ return {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    optional = true,
     opts = function()
       local hl = vim.api.nvim_set_hl
       hl(0, "NoiceCmdlinePopupBorder", { fg = "#83A598", bg = "#282828" })
@@ -257,30 +259,29 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    -- optional = true,
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
     opts = {
       plugins = { spelling = true },
-      defaults = {
-        mode = {"n"},
-        ["<leader>w"] = { "<cmd>w!<CR>", "Save" },
-        ["<leader>q"] = { "<cmd>confirm q<CR>", "Quit" },
-        ["<leader>c"] = { "+ChatGPT" },
-        ["<leader>l"] = { name = "+Lsp" },
-        ["<leader>d"] = { name = "+Debug" },
-        ["<leader>g"] = { name = "+Git" },
-        ["<leader>gh"] = { name = "+Git Hunks" },
-        ["<leader>s"] = { name = "+Search" },
-        ["<leader>t"] = { name = "+Treesitter" },
-        ["<leader>x"] = { name = "+Diagnostics/Quickfix" },
-      },
+    },
+    keys = {
+      { "<leader>c",  desc = "+ChatGPT" },
+      { "<leader>d",  group = "Debug" },
+      { "<leader>g",  group = "Git" },
+      { "<leader>gh", group = "Git Hunks" },
+      { "<leader>l",  group = "Lsp" },
+      { "<leader>q",  "<cmd>confirm q<CR>",          desc = "Quit" },
+      { "<leader>s",  group = "Search" },
+      { "<leader>t",  group = "Treesitter" },
+      { "<leader>w",  "<cmd>w!<CR>",                 desc = "Save" },
+      { "<leader>x",  group = "Diagnostics/Quickfix" },
     },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
-      wk.register(opts.defaults)
     end,
   },
 }

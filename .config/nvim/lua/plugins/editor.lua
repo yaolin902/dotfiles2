@@ -68,7 +68,6 @@ return {
     event = "VeryLazy",
     opts = {},
   },
-
   {
     "numToStr/Comment.nvim",
     version = nil,
@@ -178,22 +177,10 @@ return {
   },
   {
     'stevearc/oil.nvim',
+    optionals = true,
     opts = {},
     keys = {
       { "-", "<CMD>Oil<CR>", { desc = "Open parent directory" } },
     },
-  },
-  {
-    "nvim-pack/nvim-spectre",
-    build = false,
-    cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-    },
-  },
-  {
-    "kevinhwang91/nvim-bqf",
-    event = "VeryLazy",
   },
 }

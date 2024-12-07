@@ -45,8 +45,8 @@ opt.timeoutlen = 300
 opt.background = "dark"
 
 opt.list = true
-opt.listchars:append("space:⋅")
-opt.listchars:append("eol:↴")
+-- opt.listchars:append("space:⋅")
+-- opt.listchars:append("eol:↴")
 
 opt.foldcolumn = '1'
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]

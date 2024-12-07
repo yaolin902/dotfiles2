@@ -54,13 +54,6 @@ return {
     end
   },
   {
-    "pwntester/octo.nvim",
-    optional = true,
-    config = function()
-      require "octo".setup()
-    end
-  },
-  {
     "NeogitOrg/neogit",
     lazy = true,
     cmd = "Neogit",
@@ -98,13 +91,4 @@ return {
       vim.g.gitblame_display_virtual_text = 1
     end,
   },
-  {
-    "junegunn/gv.vim",
-    dependencies = { "tpope/vim-fugitive", },
-    keys = {
-      { "<leader>gv",  "<cmd>GV<cr>",  desc = "Git View" },
-      { "<leader>gvc", "<cmd>GV!<cr>", desc = "Git View Curr File" },
-    },
-  },
-  -- {"ThePrimeagen/git-worktree.nvim", opts = {} }
 }

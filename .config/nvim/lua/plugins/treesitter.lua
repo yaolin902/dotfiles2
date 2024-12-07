@@ -151,6 +151,7 @@ return {
   },
   {
     "Wansmer/treesj",
+    optional = true,
     config = function()
       require('treesj').setup({})
       vim.keymap.set("n", "<leader>ts", ":lua require('treesj').split()<cr>", { desc = "Split" })
