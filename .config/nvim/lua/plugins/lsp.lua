@@ -1,7 +1,7 @@
 return {
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
+    branch = 'v4.x',
     lazy = true,
     config = false,
     init = function()
@@ -222,8 +222,8 @@ return {
       -- require('lspconfig').pylyzer.setup(opts.servers.pylyzer)
 
       -- custom lsp
-      local lspconfig = require 'lspconfig'
-      local configs = require 'lspconfig.configs'
+      -- local lspconfig = require 'lspconfig'
+      -- local configs = require 'lspconfig.configs'
       -- lspconfig.secret_lsp.setup {}
     end,
   },
