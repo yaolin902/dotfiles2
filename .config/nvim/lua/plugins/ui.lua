@@ -284,4 +284,8 @@ return {
       wk.setup(opts)
     end,
   },
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+  },
 }

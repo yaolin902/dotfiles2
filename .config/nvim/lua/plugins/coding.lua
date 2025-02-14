@@ -1,12 +1,10 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    version = "v2.*",
     build = "make install_jsregexp",
     dependencies = { "rafamadriz/friendly-snippets" },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
+    opts = {},
   },
   {
     "hrsh7th/nvim-cmp",
@@ -76,9 +74,9 @@ return {
           })
         },
         experimental = {
-          ghost_text = {
+          ghost_text = vim.g.ai_cmp and {
             hl_group = "CmpGhostText",
-          },
+          } or false,
         },
         sorting = defaults.sorting,
       }
@@ -90,6 +88,8 @@ return {
     build = "cd app && yarn install",
     init = function()
       vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_browser = 'surf'
+      vim.g.mkdp_images_path = "./"
     end,
     ft = { "markdown" },
   },
@@ -107,18 +107,11 @@ return {
   },
   { "mg979/vim-visual-multi" },
   {
-    "danymat/neogen",
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
-    optional = true,
-  },
-  {
     "Exafunction/codeium.nvim",
     optional = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    opts = {},
+    opts = function()
+      vim.g.ai_cmp = true
+      return {}
+    end,
   },
 }
